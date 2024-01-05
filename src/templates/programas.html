@@ -1,0 +1,80 @@
+{%extends 'layout.html'%}
+{%block titulo%}Inicio de sesion{%endblock%}
+{%block body%}
+<h1>Programas academicos</h1>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearProyectoModal">
+    Crear Nuevo Programa
+</button>
+ <!-- Modal para crear proyectos -->
+ <div class="modal fade" id="crearProyectoModal" tabindex="-1" role="dialog" aria-labelledby="crearProyectoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearProyectoModalLabel">Crear Nuevo Programa</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para crear un nuevo proyecto -->
+                <form method="POST" action="/guardar_programa">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token()}}">
+                    <div class="form-group">
+                        <label for="name">Nombre del Programa:</label>
+                        <input type="text" class="form-control" id="name" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="titulo">titulo a otorgar:</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nivelFormacion">nivel de formación:</label>
+                        <input type="text" class="form-control" id="nivelFormacion" name="nivelFormacion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="metodologia">metodología:</label>
+                        <input type="text" class="form-control" id="metodologia" name="metodologia" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="creditos">créditos Académicos:</label>
+                        <input type="text" class="form-control" id="creditos" name="creditos" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duracion">duración estimada:</label>
+                        <input type="text" class="form-control" id="duracion" name="duracion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mision">misión:</label>
+                        <input type="textarear" class="form-control" id="mision" name="mision" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vision">visión:</label>
+                        <input type="text" class="form-control" id="vision" name="vision" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear Programa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Mostrar programas -->
+<div class="card">
+    {%for programa in programas%}
+    <h1>{{programa[1]}}</h1>
+    <h3>Titulo a otorgar</h3>
+    <p>{{programa[2]}}</p>
+    <h3>Nivel de formación</h3>
+    <p>{{programa[3]}}</p>
+    <h3>metodologia</h3>
+    <p>{{programa[4]}}</p>
+    <h3>Créditos Académicos</h3>
+    <p>{{programa[5]}}</p>
+    <h3>Duración estimada</h3>
+    <p>{{programa[6]}}</p>
+    <h3>Misión</h3>
+    <p>{{programa[7]}}</p>
+    <h3>Visión</h3>
+    <p>{{programa[8]}}</p>
+{%endfor%}
+</div>
+{%endblock%}
